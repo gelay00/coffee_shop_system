@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ shop_name or "MACS Coffee Shop" }} - Receipt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🧾 {{ shop_name or "MACS Coffee Shop" }} - Receipt</h1>
+    <div class="receipt">
+        {% if orders %}
+            <ul style="list-style: none; padding: 0;">
+                {% for order in orders %}
+                <li>{{ order.qty }}x {{ order.item }} → ₱{{ order.subtotal }}</li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <h3>Total: ₱{{ total }}</h3>
+        {% else %}
+            <p>No items ordered yet.</p>
+        {% endif %}
+    </div>
+    <br>
+    <a href="/">← Back to Menu</a>
+</body>
+</html>
