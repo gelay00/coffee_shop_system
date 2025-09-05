@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ shop_name or "MACS Coffee Shop" }} - Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>☕ {{ shop_name or "MACS Coffee Shop" }} Menu</h1>
+    <form action="/order" method="post">
+        <label for="item">Choose item:</label><br>
+        <select name="item" required>
+            {% for item, price in menu.items() %}
+            <option value="{{ item }}">{{ item }} - ₱{{ price }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="quantity">Quantity:</label><br>
+        <input type="number" name="quantity" min="1" value="1"><br><br>
+
+        <button type="submit">Add to Order</button>
+    </form>
+    <br>
+    <a href="/receipt">View Receipt</a>
+</body>
+</html>
